@@ -1,6 +1,6 @@
-﻿using SweetMQ.Core.Interfaces;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using SweetMQ.Core.Interfaces;
 
 namespace SweetMQ.Daemon
 {
