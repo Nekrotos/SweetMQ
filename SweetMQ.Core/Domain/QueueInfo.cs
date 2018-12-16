@@ -6,9 +6,9 @@ namespace SweetMQ.Core.Domain
     {
         public QueueInfo(
             string name = "",
-            bool durable = false,
-            bool exclusive = true,
-            bool autoDelete = true,
+            bool durable = true,
+            bool exclusive = false,
+            bool autoDelete = false,
             IDictionary<string, object> arguments = null
         )
         {

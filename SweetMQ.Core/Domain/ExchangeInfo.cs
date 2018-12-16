@@ -9,7 +9,7 @@ namespace SweetMQ.Core.Domain
         public ExchangeInfo(
             string name,
             ExchangeType type,
-            bool durable = false,
+            bool durable = true,
             bool autoDelete = false,
             IDictionary<string, object> arguments = null
         )

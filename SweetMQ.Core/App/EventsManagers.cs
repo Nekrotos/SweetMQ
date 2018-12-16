@@ -3,15 +3,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SweetMQ.Core.Domain;
 
 namespace SweetMQ.Core.App
 {
-    public sealed class EventsStorage
+    public sealed class EventsManagers
     {
         private static readonly IDictionary<Type, object> Instances = new Dictionary<Type, object>();
 
-        public static void AddEvent<T>(EventInstance<T> eventInstance) where T : class, IEventBase
+        public static void AddEvent<T>(EventConfig eventConfig, ConnectionFactory connectionFactory) where T : class, IEventBase
         {
+            var eventInstance = new EventInstance<T>(eventConfig, new ConnectionFactory());
             var result = Instances.TryAdd(typeof(T), eventInstance);
             if (result == false)
                 throw new Exception(nameof(AddEvent));

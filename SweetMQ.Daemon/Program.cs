@@ -19,14 +19,20 @@ namespace SweetMQ.Daemon
                 {
                     new QueueInfo("queue1"),
                     new QueueInfo("queue2")
+                }),
+                new RouteKey("dante nooby", new List<QueueInfo>
+                {
+                    new QueueInfo("queue3"),
+                    new QueueInfo("queue4")
                 })
             };
             var eventConfig = new EventConfig(exchangeInfo, routing);
 
-            var eventInstance = new EventInstance<UpdateUser>(eventConfig, new ConnectionFactory());
+            EventsManagers.AddEvent<UpdateUser>(eventConfig, new ConnectionFactory());
+            
             var updateUser = new UpdateUser(Guid.NewGuid(), "new user name");
 
-            await eventInstance.SendAsync(updateUser, "dw");
+            await EventsManagers.SendEvent(updateUser, "all admin user moderator");
 
             Console.WriteLine("Hello World!");
         }

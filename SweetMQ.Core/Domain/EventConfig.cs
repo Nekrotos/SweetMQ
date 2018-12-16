@@ -13,8 +13,8 @@ namespace SweetMQ.Core.Domain
         {
             Exchange = exchange;
             Routing = routing == null || !routing.Any()
-                ? routing
-                : throw new ArgumentNullException(nameof(routing));
+                ? throw new ArgumentNullException(nameof(routing))
+                : routing;
         }
 
         public EventConfig(
