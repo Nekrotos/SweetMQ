@@ -6,7 +6,7 @@ namespace SweetMQ.Daemon.Events
 {
     public class UpdateUserHandler : IEventHandler<UpdateUser>
     {
-        public Task Execute(UpdateUser message)
+        public Task ExecuteAsync(UpdateUser message)
         {
             throw new NotImplementedException();
         }
