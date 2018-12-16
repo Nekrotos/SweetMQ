@@ -12,7 +12,7 @@ namespace SweetMQ.Daemon
             var connectionFactory = new ConnectionFactory();
 
             services
-                .AddEventHandler<UpdateUserHandler>(connectionFactory);
+                .AddEventHandler<UpdateUserHandler>(connectionFactory,"queue1");
             
             return services;
         }

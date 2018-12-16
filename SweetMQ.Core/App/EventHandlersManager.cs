@@ -43,11 +43,12 @@ namespace SweetMQ.Core.App
 
                 chanel.BasicAck(args.DeliveryTag, false);
 
-                    //var result = Instances.TryAdd(typeof(TEventHandler), eventInstance);
-                    //if (result == false)
-                    //    throw new Exception(nameof(AddEventHandler));
-                };
+                //var result = Instances.TryAdd(typeof(TEventHandler), eventInstance);
+                //if (result == false)
+                //    throw new Exception(nameof(AddEventHandler));
+            };
 
+            chanel.QueueDeclare(queueName, true, false, false);
             chanel.BasicConsume(queueName, false, consumer);
 
             return services;
