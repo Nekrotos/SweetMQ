@@ -1,7 +1,7 @@
 ﻿using System;
 using SweetMQ.Core.Interfaces;
 
-namespace SweetMQ.Daemon
+namespace SweetMQ.Daemon.Events
 {
     public sealed class UpdateUser : IEventBase
     {

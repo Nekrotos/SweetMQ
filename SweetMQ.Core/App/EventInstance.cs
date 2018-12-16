@@ -13,8 +13,6 @@ namespace SweetMQ.Core.App
         private readonly IModel _channel;
         private readonly string _exchange;
 
-        public Type EventType { get; }
-
         public EventInstance(EventConfig eventConfig, ConnectionFactory connectionFactory)
         {
             EventType = typeof(T);
@@ -37,6 +35,8 @@ namespace SweetMQ.Core.App
                     _channel.QueueBind(queue.Name, eventConfig.Exchange.Name, route.Route);
                 }
         }
+
+        public Type EventType { get; }
 
         public async Task SendAsync(T message, string routingKey, IBasicProperties basicProperties = null)
         {

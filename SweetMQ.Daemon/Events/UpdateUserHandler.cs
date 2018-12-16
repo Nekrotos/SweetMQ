@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using SweetMQ.Core.Interfaces;
 
-namespace SweetMQ.Daemon
+namespace SweetMQ.Daemon.Events
 {
     public class UpdateUserHandler : IEventHandler<UpdateUser>
     {
