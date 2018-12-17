@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SweetMQ.Core;
 using SweetMQ.Core.App;
+using SweetMQ.Core.Domain;
 using SweetMQ.Daemon.Events;
 
 namespace SweetMQ.Daemon
@@ -12,7 +13,7 @@ namespace SweetMQ.Daemon
             var connectionFactory = new ConnectionFactory();
 
             services
-                .AddEventHandler<UpdateUserHandler>(connectionFactory,"queue1");
+                .AddEventHandler<UpdateUserHandler>(connectionFactory,new QueueInfo("queue1"));
             
             return services;
         }

@@ -15,28 +15,25 @@ namespace SweetMQ.Core.App
 
         public EventInstance(EventConfig eventConfig, ConnectionFactory connectionFactory)
         {
-            EventType = typeof(T);
             _channel = connectionFactory.Connection.CreateModel();
 
-            ExchangeDeclare(eventConfig.Exchange);
+            EventDeclare.ExchangeDeclare(ref _channel, eventConfig.Exchange);
             _exchange = eventConfig.Exchange.Name;
 
             if (eventConfig.Queues != null)
                 foreach (var queue in eventConfig.Queues)
                 {
-                    QueueDeclare(queue);
+                    EventDeclare.QueueDeclare(ref _channel, queue);
                     _channel.QueueBind(queue.Name, "", queue.Name);
                 }
             else
                 foreach (var route in eventConfig.Routing)
                 foreach (var queue in route.Queues)
                 {
-                    QueueDeclare(queue);
+                    EventDeclare.QueueDeclare(ref _channel, queue);
                     _channel.QueueBind(queue.Name, eventConfig.Exchange.Name, route.Route);
                 }
         }
-
-        public Type EventType { get; }
 
         public async Task SendAsync(T message, string routingKey, IBasicProperties basicProperties = null)
         {
@@ -55,31 +52,6 @@ namespace SweetMQ.Core.App
                 _channel.BasicPublish(_exchange, routingKey, basicProperties, Encoding.UTF8.GetBytes(body));
             });
         }
-
-        private void QueueDeclare(QueueInfo queue)
-        {
-            _channel.QueueDeclare(
-                string.IsNullOrWhiteSpace(queue.Name)
-                    ? ""
-                    : queue.Name,
-                queue.Durable,
-                queue.Exclusive,
-                queue.AutoDelete,
-                queue.Arguments
-            );
-        }
-
-        private void ExchangeDeclare(ExchangeInfo exchange)
-        {
-            _channel.ExchangeDeclare(
-                string.IsNullOrWhiteSpace(exchange.Name)
-                    ? throw new ArgumentNullException(nameof(exchange.Name))
-                    : exchange.Name,
-                exchange.Type.ToString().ToLower(),
-                exchange.Durable,
-                exchange.AutoDelete,
-                exchange.Arguments
-            );
-        }
+        
     }
 }

@@ -8,7 +8,8 @@ namespace SweetMQ.Daemon.Events
     {
         public Task ExecuteAsync(UpdateUser message)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(message.UserName);
+            return Task.CompletedTask;
         }
     }
 }
