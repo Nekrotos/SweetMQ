@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using RabbitMQ.Client;
 using SweetMQ.Core.Domain;
 
@@ -8,7 +6,7 @@ namespace SweetMQ.Core.App
 {
     internal class EventDeclare
     {
-        internal static void QueueDeclare(ref IModel channel,QueueInfo queue)
+        internal static void QueueDeclare(ref IModel channel, QueueInfo queue)
         {
             channel.QueueDeclare(
                 string.IsNullOrWhiteSpace(queue.Name)

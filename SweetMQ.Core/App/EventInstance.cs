@@ -52,6 +52,5 @@ namespace SweetMQ.Core.App
                 _channel.BasicPublish(_exchange, routingKey, basicProperties, Encoding.UTF8.GetBytes(body));
             });
         }
-        
     }
 }
