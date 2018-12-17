@@ -45,14 +45,9 @@ namespace SweetMQ.Daemon
                 })
             };
             var eventConfig = new EventConfig(exchangeInfo, routing);
-
             EventsManager.AddEvent<UpdateUser>(eventConfig, new ConnectionFactory());
-
             var updateUser = new UpdateUser(Guid.NewGuid(), "new user name");
-
             await EventsManager.SendEvent(updateUser, "all admin user moderator");
-
-
             await Task.CompletedTask;
         }
 

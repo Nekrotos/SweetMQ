@@ -17,7 +17,7 @@ namespace SweetMQ.Core.App
             this IServiceCollection services,
             ConnectionFactory connectionFactory,
             QueueInfo queueInfo
-        ) where TEventHandler : class // TODO, IEventHandler<T> where T : class, IEventBase
+        ) where TEventHandler : class
         {
             var type = typeof(TEventHandler)
                 .GetInterfaces()
